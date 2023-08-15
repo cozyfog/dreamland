@@ -11,6 +11,7 @@ typedef struct {
 	struct {
 		f32 dt;
 		f32 lt;
+		u64 tick;
 	} time;
 	
 	Entity *entities[MAX_ENTITY_COUNT];

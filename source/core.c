@@ -10,6 +10,7 @@ Core *getGlobalCore() {
 }
 
 void coreUpdateTime() {
+	++core.time.tick;
 	f32 ct = GetTickCount() * 0.0001f;
 	if (core.time.lt == 0.0f)
 		core.time.lt = ct;
