@@ -19,14 +19,16 @@
 #include "render.h"
 #include "vector.h"
 #include "core.h"
+#include "input.h"
 
 // Win32 external modules.
-#include "win32_input.h"
+#include "win32_controller.h"
 
 global bool running;
 
 internal LRESULT win32WindowCallback(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
 	LRESULT result = 0;
+	char msg[32];
 	
 	switch (message) {
 		case WM_SIZE: {
@@ -54,6 +56,31 @@ internal LRESULT win32WindowCallback(HWND window, UINT message, WPARAM wparam, L
 			PAINTSTRUCT paint;
 			BeginPaint(window, &paint);
 			EndPaint(window, &paint);
+			break;
+		}
+		
+		// NOTE(daniel): useless
+		/*case WM_SYSKEYDOWN: {
+			sprintf(msg, "%lp", wparam);
+			OutputDebugString(msg);
+			OutputDebugString("\n");
+			break;
+		}
+		
+		case WM_SYSKEYUP: {
+			sprintf(msg, "%lp", wparam);
+			OutputDebugString(msg);
+			OutputDebugString("\n");
+			break;
+		}*/
+		
+		case WM_KEYDOWN: {
+			keyboardCallback(wparam, true);
+			break;
+		}
+		
+		case WM_KEYUP: {
+			keyboardCallback(wparam, false);
 			break;
 		}
 		
@@ -152,7 +179,7 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 			profile.stick_x *= 0.0001;
 			profile.stick_y *= 0.0001;
 			
-			win32ExecuteControllerCallback(profile);
+			//win32ExecuteControllerCallback(profile);
 		}
 		
 		coreUpdateTime();
