@@ -9,7 +9,6 @@ patterns = {
 	"*.h",
 	"*.bat",
 	"*.sh",
-	"*.siz",
 	"*.4coder",
 };
 

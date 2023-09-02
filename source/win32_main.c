@@ -124,7 +124,7 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 	assert(window_handle, "Error: Creating window handle.");
 	
 	// Remove window maximize button.
-	SetWindowLong(window_handle, GWL_STYLE, GetWindowLong(window_handle, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+	//SetWindowLong(window_handle, GWL_STYLE, GetWindowLong(window_handle, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 	
 	// ERROR(daniel): Getting device context.
 	device_context = GetDC(window_handle);
