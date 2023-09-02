@@ -2,11 +2,11 @@
 #include "gl/glew.h"
 #include "typedef.h"
 
-void spriteLoad(u32 *texture_id, const char *filename) {
+void spriteLoad(u32 *id, const char *filename) {
 	LIBFF_Texture texture = LIBFF_textureLoad(filename);
 	
-	glGenTextures(1, texture_id);
-	glBindTexture(GL_TEXTURE_2D, *texture_id);
+	glGenTextures(1, id);
+	glBindTexture(GL_TEXTURE_2D, *id);
 	
 	glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, texture.width, texture.height, 0, GL_RGB, GL_UNSIGNED_BYTE, texture.data);
 	glTexParameterf(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);

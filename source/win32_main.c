@@ -75,12 +75,12 @@ internal LRESULT win32WindowCallback(HWND window, UINT message, WPARAM wparam, L
 		}*/
 		
 		case WM_KEYDOWN: {
-			keyboardCallback(wparam, true);
+			inputCallback(wparam, true);
 			break;
 		}
 		
 		case WM_KEYUP: {
-			keyboardCallback(wparam, false);
+			inputCallback(wparam, false);
 			break;
 		}
 		
@@ -123,8 +123,8 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 	window_handle = CreateWindowEx(0, window_class.lpszClassName, "dreamland", WS_OVERLAPPEDWINDOW | WS_VISIBLE, CW_USEDEFAULT, CW_USEDEFAULT, WIN32_WINDOW_WIDTH, WIN32_WINDOW_HEIGHT, 0, 0, instance, 0);
 	assert(window_handle, "Error: Creating window handle.");
 	
-	// Remove window maximise button.
-	//SetWindowLong(window_handle, GWL_STYLE, GetWindowLong(window_handle, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
+	// Remove window maximize button.
+	SetWindowLong(window_handle, GWL_STYLE, GetWindowLong(window_handle, GWL_STYLE) & ~WS_MAXIMIZEBOX & ~WS_SIZEBOX);
 	
 	// ERROR(daniel): Getting device context.
 	device_context = GetDC(window_handle);
