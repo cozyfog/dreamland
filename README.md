@@ -6,3 +6,4 @@ only made with win32 API and OpenGL.
 - glew (opengl)
 - stb (image loading)
 - win32 (windows platform layer)
+- cute_c2 (collision detection)

@@ -6,7 +6,8 @@
 	- [X] basic slippery controller
 	- [ ] make controller snappy
 - [ ] create animation system
-- [ ] implement trigger AABB
+- [x] implement trigger AABB
+	- [ ] solve weird hitbox offset problem
 - [ ] collision resolves
 - [ ] create world serialization
 - [ ] create first enemy with AI

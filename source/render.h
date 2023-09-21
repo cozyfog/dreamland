@@ -3,8 +3,8 @@
 #ifndef RENDER_H
 #define RENDER_H
 
-#define SCREEN_VIEW_WIDTH      320
-#define SCREEN_VIEW_HEIGHT     180
+#define SCREEN_VIEW_WIDTH      160
+#define SCREEN_VIEW_HEIGHT     90
 
 void renderInit();
 void renderDraw();

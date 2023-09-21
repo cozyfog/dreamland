@@ -6,6 +6,9 @@
 #include <stdint.h>
 #include <stdbool.h>
 
+// Costum implementation of std::pair<typename, typename>
+#define PAIR(ta, tb)     struct { ta a; tb b; }
+
 typedef int8_t         i8;
 typedef int16_t        i16;
 typedef int32_t        i32;

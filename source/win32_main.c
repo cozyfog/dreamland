@@ -1,6 +1,5 @@
 #define _UTILS_WIN32
 #define _WIN32_MAIN_C
-#define GLEW_BUILD
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -28,7 +27,6 @@ global bool running;
 
 internal LRESULT win32WindowCallback(HWND window, UINT message, WPARAM wparam, LPARAM lparam) {
 	LRESULT result = 0;
-	char msg[32];
 	
 	switch (message) {
 		case WM_SIZE: {
@@ -75,12 +73,12 @@ internal LRESULT win32WindowCallback(HWND window, UINT message, WPARAM wparam, L
 		}*/
 		
 		case WM_KEYDOWN: {
-			inputCallback(wparam, true);
+			inputKeyPressCallback(wparam);
 			break;
 		}
 		
 		case WM_KEYUP: {
-			inputCallback(wparam, false);
+			inputKeyReleaseCallback(wparam);
 			break;
 		}
 		

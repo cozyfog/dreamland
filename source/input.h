@@ -5,9 +5,8 @@
 
 #include "typedef.h"
 
-void inputCallback(u8 keycode, bool held);
+void inputKeyPressCallback(u8 keycode);
+void inputKeyReleaseCallback(u8 keycode);
 bool inputKeyHeld(u8 keycode);
-bool inputKeyPress(u8 keycode);
-bool inputKeyRelease(u8 keycode);
 
 #endif //INPUT_H

@@ -38,10 +38,10 @@ global const char *fragment_source =
 "in vec2 tex_coord;\n"
 "uniform sampler2D u_texture;\n"
 "void main() {\n"
-"  vec3 tex_color = texture(u_texture, tex_coord).rgb;\n"
-"  if (tex_color == vec3(0.0, 0.0, 0.0))\n"
+"  vec4 tex_color = texture(u_texture, tex_coord);\n"
+"  if (tex_color.a == 0.0)\n"
 "    discard;\n"
-"  color = vec4(tex_color, 1.0f);\n"
+"  color = tex_color;\n"
 "}\0";
 
 global f32 vertices[] = {

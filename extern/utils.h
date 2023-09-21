@@ -5,12 +5,12 @@
 
 #ifdef _UTILS_WIN32
 #include <windows.h>
-#else
-#include <stdio.h>
 #endif
 
+#include <stdio.h>
 #include <stdlib.h>
 #include <stdbool.h>
+#include <string.h>
 
 static void assert(bool cond, const char *msg) {
 	if (!cond) {
@@ -21,6 +21,23 @@ static void assert(bool cond, const char *msg) {
 #endif
 		exit(1);
 	}
+}
+
+static char *str_add(const char *a, const char *b) {
+	size_t a_len = strlen(a);
+	size_t b_len = strlen(b);
+	
+	char *result = (char*)malloc(sizeof(char) * (a_len + b_len));
+	
+	for (size_t i = 0; i < a_len; ++i) {
+		result[i] = a[i];
+	}
+	
+	for (size_t i = 0; i < b_len; ++i) {
+		result[a_len + i] = b[i];
+	}
+	
+	return result;
 }
 
 #endif //UTILS_H
