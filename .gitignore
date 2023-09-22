@@ -28,9 +28,10 @@
 *.so.*
 *.dylib
 
+# Build directories
+build*/
+
 # Executables
-build/
-build-int/
 *.exe
 *.out
 *.app
