@@ -15,6 +15,7 @@
 
 // Game code.
 #include "dreamland.h"
+#include "physics.h"
 #include "render.h"
 #include "vector.h"
 #include "core.h"
@@ -151,11 +152,12 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 	
 	// ERROR(daniel): Modern OpenGL initialisation.
 	assert(glewInit() == GLEW_OK, "Error: GLEW initialisation.");
-	renderInit();
+	renderEntry();
 	
 	// Dreamland initialisation.
 	running = true;
 	dreamlandEntry();
+	physicsEntry();
 	
 	// Window main loop.
 	ShowWindow(window_handle, show_code);
@@ -182,7 +184,8 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 		
 		coreUpdateTime();
 		dreamlandUpdate();
-		renderDraw();
+		physicsUpdate();
+		renderUpdate();
 		
 		UpdateWindow(window_handle);
 	}

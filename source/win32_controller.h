@@ -17,7 +17,7 @@ internal void win32VibrationDisable(DWORD controller_index) {
 	XInputSetState(controller_index, &vibration);
 }*/
 
-typedef struct {
+class(Win32InputProfile) {
 	DWORD index;
 	
 	bool dpad_up;
@@ -38,7 +38,7 @@ typedef struct {
 	
 	i16 stick_x;
 	i16 stick_y;
-} Win32InputProfile;
+};
 
 void win32ExecuteControllerCallback(Win32InputProfile profile);
 void win32SetControllerCallback(void (*callback)(Win32InputProfile));

@@ -40,4 +40,10 @@ static char *str_add(const char *a, const char *b) {
 	return result;
 }
 
+static char *int_to_str(int n) {
+	char *result = (char*)malloc(sizeof(char) * 10);
+	sprintf(result, "%d", n);
+	return result;
+}
+
 #endif //UTILS_H

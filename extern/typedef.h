@@ -22,6 +22,9 @@ typedef uint64_t       u64;
 typedef float          f32;
 typedef double         f64;
 
+#undef  enum
+#define enum(name)       typedef enum name name; enum name
+#define class(name)      typedef struct name name; struct name
 #define internal         static
 #define local_persist    static
 #define global           static

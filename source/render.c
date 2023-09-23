@@ -55,7 +55,7 @@ global f32 vertices[] = {
 	-0.5f, +0.5f, +0.0f,  0.0f, 1.0f
 };
 
-void renderInit() {
+void renderEntry() {
 	core = getGlobalCore();
 	
 	glEnable(GL_BLEND);
@@ -64,7 +64,7 @@ void renderInit() {
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
 	
-	projection_matrix = newOrthoProjectionMatrix(-SCREEN_VIEW_WIDTH * 0.5, SCREEN_VIEW_WIDTH * 0.5, -SCREEN_VIEW_HEIGHT * 0.5, SCREEN_VIEW_HEIGHT * 0.5, -1.0f, 1.0f);
+	projection_matrix = newOrthoProjectionMatrix(-SCREEN_VIEW_WIDTH / 4, SCREEN_VIEW_WIDTH / 4, -SCREEN_VIEW_HEIGHT / 4, SCREEN_VIEW_HEIGHT / 4, -1.0f, 1.0f);
 	
 	// Shader
 	u32 vertex;
@@ -119,19 +119,26 @@ void renderInit() {
 	glBindVertexArray(0);
 }
 
-void renderDraw() {
-	glClearColor(0.06f, 0.05f, 0.1f, 1.0f);
-	glClear(GL_COLOR_BUFFER_BIT);
+void renderDrawSprite(u32 sprite, vec3 pos, vec3 scale) {
+	glUseProgram(shader);
+	glBindVertexArray(vao);
+	glBindTexture(GL_TEXTURE_2D, sprite);
 	
+	glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
+	glUniformMatrix4fv(glGetUniformLocation(shader, "u_projection"), 1, false, projection_matrix);
+	glUniform3f(glGetUniformLocation(shader, "u_scale"), scale.x, scale.y, scale.z);
+	glUniform3f(glGetUniformLocation(shader, "u_pos"), pos.x, pos.y, pos.z);
+	
+	glDrawArrays(GL_TRIANGLES, 0, 6);
+	glBindVertexArray(0);
+}
+
+void renderUpdate() {
 	glUseProgram(shader);
 	glBindVertexArray(vao);
 	
 	for (u64 i = 0; i < core->entity_count; ++i) {
 		Entity *entity = core->entities[i];
-		
-		entity->pos.x += entity->vel.x;
-		entity->pos.y += entity->vel.y;
-		entity->pos.z += entity->vel.z;
 		
 		glBindTexture(GL_TEXTURE_2D, entity->sprite);
 		

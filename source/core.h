@@ -7,7 +7,7 @@
 #include "vector.h"
 #include "entity.h"
 
-typedef struct {
+class(Core) {
 	struct {
 		f32 dt;
 		f32 lt;
@@ -16,7 +16,7 @@ typedef struct {
 	
 	Entity *entities[MAX_ENTITY_COUNT];
 	u64 entity_count;
-} Core;
+};
 
 Core *getGlobalCore();
 void coreUpdateTime();
