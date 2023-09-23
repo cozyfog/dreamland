@@ -29,7 +29,9 @@
 *.dylib
 
 # Build directories
-build*/
+build/
+build-int/
+.vs/
 
 # Executables
 *.exe
