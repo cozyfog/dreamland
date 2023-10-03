@@ -58,9 +58,6 @@ global f32 vertices[] = {
 void renderEntry() {
 	core = getGlobalCore();
 	
-	glEnable(GL_BLEND);
-	glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
-	
 	glGenVertexArrays(1, &vao);
 	glGenBuffers(1, &vbo);
 	
@@ -127,13 +124,15 @@ void renderDrawSprite(u32 sprite, vec3 pos, vec3 scale) {
 	glUniform1i(glGetUniformLocation(shader, "u_texture"), 0);
 	glUniformMatrix4fv(glGetUniformLocation(shader, "u_projection"), 1, false, projection_matrix);
 	glUniform3f(glGetUniformLocation(shader, "u_scale"), scale.x, scale.y, scale.z);
-	glUniform3f(glGetUniformLocation(shader, "u_pos"), pos.x, pos.y, pos.z);
+	glUniform3f(glGetUniformLocation(shader, "u_pos"), pos.x - core->camera.x, pos.y - core->camera.y, pos.z - core->camera.z);
 	
 	glDrawArrays(GL_TRIANGLES, 0, 6);
 	glBindVertexArray(0);
 }
 
 void renderUpdate() {
+	glClear(GL_COLOR_BUFFER_BIT);
+	
 	glUseProgram(shader);
 	glBindVertexArray(vao);
 	

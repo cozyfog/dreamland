@@ -4,10 +4,17 @@
 #define PHYSICS_H
 
 #include "typedef.h"
+#include "vector.h"
 
-enum(PhysicsBody) {
+enum(PhysicsBodyType) {
 	PHYSICS_BODY_STATIC,
 	PHYSICS_BODY_DYNAMIC
+};
+
+class(PhysicsBody) {
+	PhysicsBodyType type;
+	vec2 offset;
+	vec2 scale;
 };
 
 void physicsEntry();

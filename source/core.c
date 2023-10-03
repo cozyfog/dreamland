@@ -1,4 +1,4 @@
-#include <windows.h>
+#include <time.h>
 #include "core.h"
 #include "typedef.h"
 #include "vector.h"
@@ -16,4 +16,5 @@ void coreUpdateTime() {
 		core.time.lt = ct;
 	core.time.dt = (ct - core.time.lt) * 60.0f;
 	core.time.lt = ct;
+	core.time.curr = core.time.start - time(NULL);
 }

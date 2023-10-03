@@ -1,7 +1,6 @@
 #include "typedef.h"
 #include "physics.h"
 #include "core.h"
-#include "cute_c2.h"
 #include "vector.h"
 #include "entity.h"
 
@@ -11,53 +10,39 @@ void physicsEntry() {
 	core = getGlobalCore();
 }
 
-internal void physicsResponse(Entity *entity, Entity *other) {
-	bool on_top = entity->pos.y > other->pos.y;
-	bool on_right = entity->pos.x > other->pos.x;
+bool AABBvsAABB(Entity *a, Entity *b) {
+	vec2 a_min = {a->pos.x + a->physics_body.offset.x, a->pos.y + a->physics_body.offset.y};
+	vec2 a_max = vec2_add_vec2(a_min, a->physics_body.scale);
 	
-	// TODO
+	vec2 b_min = {b->pos.x + b->physics_body.offset.x, b->pos.y + b->physics_body.offset.y};
+	vec2 b_max = vec2_add_vec2(b_min, b->physics_body.scale);
+	
+  if(a_max.x < b_min.x || a_min.x > b_max.x) return false;
+	if(a_max.y < b_min.y || a_min.y > b_max.y) return false;
+	return true;
 }
 
 void physicsUpdate() {
-	u64 curr_index = 0;
-	Entity *curr = core->entities[curr_index];
-	
-	while (curr != NULL || curr_index < core->entity_count) {
-		curr->last = curr->pos;
-		curr->pos = vec3_add_vec3(curr->pos, curr->vel);
+	for (u64 i = 0; i < core->entity_count; ++i) {
+		Entity *entity = core->entities[i];
 		
-		if (curr->physics_body == PHYSICS_BODY_STATIC) {
-			curr = core->entities[++curr_index];
+		if (entity->physics_body.type == PHYSICS_BODY_STATIC) {
 			continue;
 		}
 		
-		vec3 curr_half = vec3_mul(curr->scale, 0.5);
-		c2AABB curr_aabb = {
-			vec3_to_c2v(vec3_sub_vec3(curr->pos, curr_half)),
-			vec3_to_c2v(vec3_add_vec3(curr->pos, curr_half))
-		};
-		
-		u64 coll_index = 0;
-		Entity *coll = core->entities[coll_index];
-		while (coll != NULL || coll_index < core->entity_count) {
-			if (coll_index == curr_index) {
-				coll = core->entities[++coll_index];
-				continue;
+		entity->pos = vec3_add_vec3(entity->pos, entity->vel);
+		/*
+		Entity hits[MAX_ENTITY_COUNT] = {0};
+		u64 hit_index = 0;
+		for (u64 j = 0; j < core->entity_count; ++j) {
+			if (j == i) continue;
+			
+			Entity *other = core->entities[j];
+			
+			if (AABBvsAABB(entity->aabb, other->aabb)) {
+				hits[hit_index] = other;
+				++hit_index;
 			}
-			
-			vec3 coll_half = vec3_mul(coll->scale, 0.5);
-			c2AABB coll_aabb = {
-				vec3_to_c2v(vec3_sub_vec3(coll->pos, coll_half)),
-				vec3_to_c2v(vec3_add_vec3(coll->pos, coll_half))
-			};
-			
-			if (c2AABBtoAABB(curr_aabb, coll_aabb)) {
-				physicsResponse(curr, coll);
-			}
-			
-			coll = core->entities[++coll_index];
-		}
-		
-		curr = core->entities[++curr_index];
+		}*/
 	}
 }

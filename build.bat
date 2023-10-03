@@ -1,5 +1,8 @@
 @echo off
 
+if not exist build mkdir build
+if not exist build-int mkdir build-int
+
 set BINARY=..\build\win32_dreamland.exe
 set SOURCE=..\source\*.c
 set LIBRARIES=gdi32.lib user32.lib Ole32.lib opengl32.lib ..\build\glew32.lib

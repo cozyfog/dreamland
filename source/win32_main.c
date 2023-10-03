@@ -1,6 +1,8 @@
 #define _UTILS_WIN32
 #define _WIN32_MAIN_C
 
+#include <io.h>
+#include <fcntl.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -8,6 +10,7 @@
 #include <windows.h>
 #include <xinput.h>
 #include <math.h>
+#include <time.h>
 #include "gl/glew.h"
 #include "typedef.h"
 #include "utils.h"
@@ -17,6 +20,7 @@
 #include "dreamland.h"
 #include "physics.h"
 #include "render.h"
+#include "sound.h"
 #include "vector.h"
 #include "core.h"
 #include "input.h"
@@ -156,6 +160,8 @@ i32 APIENTRY WinMain(HINSTANCE instance, HINSTANCE prev_instance, LPSTR cmd_line
 	
 	// Dreamland initialisation.
 	running = true;
+	getGlobalCore()->time.start = time(NULL);
+	soundEntry();
 	dreamlandEntry();
 	physicsEntry();
 	
