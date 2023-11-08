@@ -1,3 +1,6 @@
+# DEPRICATED
+# I'm reworking it in private see my commmit history on my [account page](https://github.com/nickel-dev)
+
 # dreamland
 A RPG Game I'm working on,
 The goal is to use the least libraries possible.
